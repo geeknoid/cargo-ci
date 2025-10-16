@@ -1,0 +1,53 @@
+default_jobs = ["build", "analyze"]
+
+passthrough_env_variables = [
+    "CARGO_HOME",
+]
+
+passthrough_env_variables_windows = [
+    "PATH",
+    "TMP",
+    "TEMP",
+    "CommonProgramFiles",
+    "CommonProgramFiles(x86)",
+    "CommonProgramW6432",
+    "ComSpec",
+    "PROCESSOR_ARCHITECTURE",
+    "PROCESSOR_IDENTIFIER",
+    "PROCESSOR_LEVEL",
+    "PROCESSOR_REVISION",
+    "ProgramData",
+    "ProgramFiles",
+    "ProgramFiles(x86)",
+    "ProgramW6432",
+    "SystemDrive",
+    "SystemRoot",
+    "USERDOMAIN",
+    "USERNAME",
+    "USERPROFILE",
+    "WINDIR"
+]
+
+[variables]
+Foo = "Bar"
+Bar = "Foo"
+
+[tools]
+cargo-rdme = "1.5.0"
+cargo-hack = "0.4.7"
+#bogus = "0.1.6"
+
+[jobs.build]
+name = "Build"
+steps = [
+    "echo STEP-1"
+]
+
+[jobs.analyze]
+name = "Analyze"
+steps = [
+    "echo STEP-2",
+    "echo STEP-3",
+    { command = "echo STEP-4", per_package = true, id = "FooBar" },
+    "echo STEP-5"
+]
