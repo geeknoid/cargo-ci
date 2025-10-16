@@ -1,0 +1,42 @@
+variables = [
+    "PATH",
+    "CARGO_HOME",
+    "TMP",
+    "TEMP",
+    "CommonProgramFiles",
+    "CommonProgramFiles(x86)",
+    "CommonProgramW6432",
+    "ComSpec",
+    "PROCESSOR_ARCHITECTURE",
+    "PROCESSOR_IDENTIFIER",
+    "PROCESSOR_LEVEL",
+    "PROCESSOR_REVISION",
+    "ProgramData",
+    "ProgramFiles",
+    "ProgramFiles(x86)",
+    "ProgramW6432",
+    "SystemDrive",
+    "SystemRoot",
+    "USERDOMAIN",
+    "USERNAME",
+    "USERPROFILE",
+    "WINDIR"
+]
+
+[tools]
+cargo-rdme = "1.5.0"
+cargo-hack = "0.4.7"
+bogus = "0.1.6"
+
+[jobs.build]
+name = "Build"
+steps = [
+    "cargo build --workspace --all-targets --all-features"]
+
+[jobs.analyze]
+name = "Analyze"
+steps = [
+    "cargo clippy --all-features --all-targets",
+    "cargo fmt --check",
+    "cargo rdme --check",
+]
